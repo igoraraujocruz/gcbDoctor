@@ -1,4 +1,4 @@
-import './shared/infra/typeorm';
+import '@shared/infra/typeorm';
 import express from 'express';
 
 require('dotenv/config');
