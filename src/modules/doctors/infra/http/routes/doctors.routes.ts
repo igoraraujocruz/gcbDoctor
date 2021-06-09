@@ -10,10 +10,10 @@ doctorsRouter.post(
   celebrate({
     [Segments.BODY]: {
       name: Joi.string().required(),
-      crm: Joi.string().required(),
-      landline: Joi.string().required(),
-      mobile_phone: Joi.string().required(),
-      zip_code: Joi.string().required(),
+      crm: Joi.number().required(),
+      landline: Joi.number().required(),
+      mobile_phone: Joi.number().required(),
+      zip_code: Joi.number().required(),
       medical_specialty: Joi.string().required(),
     },
   }),
