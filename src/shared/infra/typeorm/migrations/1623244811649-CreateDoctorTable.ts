@@ -54,6 +54,11 @@ export default class CreateDoctorTable1623244811649
             type: 'timestamp',
             default: 'now()',
           },
+          {
+            name: 'deleted_at',
+            type: 'timestamp',
+            isNullable: true,
+          },
         ],
       }),
     );
