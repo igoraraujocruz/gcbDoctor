@@ -46,4 +46,14 @@ doctorsRouter.delete(
   doctorsController.delete,
 );
 
+doctorsRouter.get(
+  '/:id',
+  celebrate({
+    [Segments.PARAMS]: {
+      id: Joi.string().uuid().required(),
+    },
+  }),
+  doctorsController.list,
+);
+
 export default doctorsRouter;

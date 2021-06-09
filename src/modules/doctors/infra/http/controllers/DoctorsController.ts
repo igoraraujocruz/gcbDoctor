@@ -3,6 +3,7 @@ import { container } from 'tsyringe';
 import CreateDoctorService from '@modules/doctors/services/CreateDoctorService';
 import UpdateDoctorService from '@modules/doctors/services/UpdateDoctorService';
 import DeleteDoctorService from '@modules/doctors/services/DeleteDoctorService';
+import SelectDoctorService from '@modules/doctors/services/SelectDoctorService';
 
 export default class DoctorsController {
   public async create(request: Request, response: Response): Promise<Response> {
@@ -52,5 +53,15 @@ export default class DoctorsController {
     const doctor = await deleteDoctor.execute(id);
 
     return response.status(204).json(doctor);
+  }
+
+  public async list(request: Request, response: Response): Promise<Response> {
+    const { id } = request.params;
+
+    const listDoctor = container.resolve(SelectDoctorService);
+
+    const doctor = await listDoctor.execute(id);
+
+    return response.json(doctor);
   }
 }
