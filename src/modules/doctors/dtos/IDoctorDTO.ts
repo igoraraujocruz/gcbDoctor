@@ -1,4 +1,5 @@
-export default interface ICreateDoctorDTO {
+export default interface IDoctorDTO {
+  id?: string;
   name: string;
   crm: string;
   landline: string;

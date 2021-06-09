@@ -4,13 +4,14 @@ import IDoctorsRepository from '@modules/doctors/repositories/IDoctorsRepository
 import IDoctorDTO from '@modules/doctors/dtos/IDoctorDTO';
 
 @injectable()
-export default class CreateDoctorService {
+export default class UpdateDoctorService {
   constructor(
     @inject('DoctorsRepository')
     private doctorsRepository: IDoctorsRepository,
   ) {}
 
   public async execute({
+    id,
     name,
     crm,
     landline,
@@ -18,7 +19,8 @@ export default class CreateDoctorService {
     mobilePhone,
     zipCode,
   }: IDoctorDTO): Promise<Doctor> {
-    const doctor = await this.doctorsRepository.create({
+    const doctor = await this.doctorsRepository.update({
+      id,
       name,
       crm,
       landline,

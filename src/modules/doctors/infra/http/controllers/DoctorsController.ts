@@ -8,9 +8,9 @@ export default class DoctorsController {
       const { name, crm, landline, medicalSpecialty, mobilePhone, zipCode } =
         request.body;
 
-      const createUser = container.resolve(CreateDoctorService);
+      const createDoctor = container.resolve(CreateDoctorService);
 
-      const user = await createUser.execute({
+      const user = await createDoctor.execute({
         name,
         crm,
         landline,

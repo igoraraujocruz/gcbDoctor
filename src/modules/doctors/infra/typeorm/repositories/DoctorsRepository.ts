@@ -1,7 +1,7 @@
 import { getRepository, Repository } from 'typeorm';
 import IDoctorsRepository from '@modules/doctors/repositories/IDoctorsRepository';
 import Doctor from '@modules/doctors/infra/typeorm/entities/Doctor';
-import ICreateDoctorDTO from '@modules/doctors/dtos/ICreateDoctorDTO';
+import IDoctorDTO from '@modules/doctors/dtos/IDoctorDTO';
 
 export default class DoctorsRepository implements IDoctorsRepository {
   private ormRepository: Repository<Doctor>;
@@ -17,7 +17,7 @@ export default class DoctorsRepository implements IDoctorsRepository {
     medicalSpecialty,
     mobilePhone,
     zipCode,
-  }: ICreateDoctorDTO): Promise<Doctor> {
+  }: IDoctorDTO): Promise<Doctor> {
     const user = this.ormRepository.create({
       name,
       crm,
@@ -28,6 +28,33 @@ export default class DoctorsRepository implements IDoctorsRepository {
     });
     await this.ormRepository.save(user);
     return user;
+  }
+
+  public async update({
+    id,
+    name,
+    crm,
+    landline,
+    medicalSpecialty,
+    mobilePhone,
+    zipCode,
+  }: IDoctorDTO): Promise<Doctor> {
+    const doctor = await this.ormRepository.findOne({
+      where: { id },
+    });
+
+    if (!doctor) {
+      throw new Error('doctor id not found');
+    }
+
+    doctor.name = name;
+    doctor.crm = crm;
+    doctor.landline = landline;
+    doctor.medicalSpecialty = medicalSpecialty;
+    doctor.mobilePhone = mobilePhone;
+    doctor.zipCode = zipCode;
+
+    return this.ormRepository.save(doctor);
   }
 
   public async save(user: Doctor): Promise<Doctor> {
