@@ -57,6 +57,17 @@ export default class DoctorsRepository implements IDoctorsRepository {
     return this.ormRepository.save(doctor);
   }
 
+  public async delete(id: string): Promise<void> {
+    await this.ormRepository.delete(id);
+  }
+
+  public async findById(id: string): Promise<Doctor | undefined> {
+    const findId = await this.ormRepository.findOne({
+      where: { id },
+    });
+    return findId;
+  }
+
   public async save(user: Doctor): Promise<Doctor> {
     return this.ormRepository.save(user);
   }
