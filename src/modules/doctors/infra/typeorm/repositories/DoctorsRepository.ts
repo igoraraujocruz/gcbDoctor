@@ -44,7 +44,7 @@ export default class DoctorsRepository implements IDoctorsRepository {
     });
 
     if (!doctor) {
-      throw new Error('doctor id not found');
+      throw new Error('doctor_id not found');
     }
 
     doctor.name = name;
