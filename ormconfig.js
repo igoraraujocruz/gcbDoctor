@@ -1,5 +1,3 @@
-require('dotenv/config');
-
 const dir = process.env.NODE_ENV === 'dev' ? 'src' : 'dist';
 const file = process.env.NODE_ENV === 'dev' ? 'ts' : 'js';
 
@@ -10,6 +8,7 @@ module.exports = {
     username: process.env.DB_USER,
     password: process.env.DB_PASS,
     database: process.env.DB_NAME,
+    entities: [`./${dir}/modules/**/infra/typeorm/entities/*.${file}`],
     migrations: [`./${dir}/shared/infra/typeorm/migrations/*.${file}`],
     cli: {
         "migrationsDir": `./${dir}/shared/infra/typeorm/migrations/`
