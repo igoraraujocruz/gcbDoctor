@@ -3,6 +3,7 @@ import Doctor from '@modules/doctors/infra/typeorm/entities/Doctor';
 import IDoctorsRepository from '@modules/doctors/repositories/IDoctorsRepository';
 import IDoctorDTO from '@modules/doctors/dtos/IDoctorDTO';
 import AppError from '@shared/errors/AppError';
+import axios from 'axios';
 
 @injectable()
 export default class CreateDoctorService {
@@ -37,6 +38,10 @@ export default class CreateDoctorService {
       zipCode,
     });
 
-    return doctor;
+    const { data } = await axios(`https://viacep.com.br/ws/${zipCode}/json/`);
+
+    const teste = Object.assign(doctor, data);
+
+    return teste;
   }
 }
