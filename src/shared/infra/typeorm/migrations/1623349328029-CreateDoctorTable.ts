@@ -1,6 +1,6 @@
 import { MigrationInterface, QueryRunner, Table } from 'typeorm';
 
-export default class CreateDoctorTable1623244811649
+export default class CreateDoctorTable1623349328029
   implements MigrationInterface
 {
   public async up(queryRunner: QueryRunner): Promise<void> {
@@ -42,7 +42,7 @@ export default class CreateDoctorTable1623244811649
           },
           {
             name: 'medical_specialty',
-            type: 'varchar',
+            type: 'uuid',
           },
           {
             name: 'created_at',
@@ -58,6 +58,16 @@ export default class CreateDoctorTable1623244811649
             name: 'deleted_at',
             type: 'timestamp',
             isNullable: true,
+          },
+        ],
+        foreignKeys: [
+          {
+            name: 'medical_specialtyForeignKey',
+            referencedTableName: 'medical_specialty',
+            referencedColumnNames: ['id'],
+            columnNames: ['medical_specialty'],
+            onDelete: 'SET NULL',
+            onUpdate: 'CASCADE',
           },
         ],
       }),

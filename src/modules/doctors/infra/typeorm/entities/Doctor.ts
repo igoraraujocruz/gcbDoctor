@@ -5,7 +5,10 @@ import {
   CreateDateColumn,
   UpdateDateColumn,
   DeleteDateColumn,
+  OneToMany,
+  JoinColumn,
 } from 'typeorm';
+import MedicalSpecialty from './MedicalSpecialty';
 
 @Entity('doctors')
 export default class Doctor {
@@ -29,6 +32,13 @@ export default class Doctor {
 
   @Column({ name: 'medical_specialty' })
   medicalSpecialty: string;
+
+  @OneToMany(
+    () => MedicalSpecialty,
+    medicalSpecialty => medicalSpecialty.doctor,
+  )
+  @JoinColumn({ name: 'medicalSpecialty' })
+  medicalSpecialties: MedicalSpecialty[];
 
   @CreateDateColumn({ name: 'created_at' })
   createdAt: Date;
