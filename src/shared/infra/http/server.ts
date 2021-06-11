@@ -5,11 +5,14 @@ import '@shared/container';
 import routes from '@shared/infra/http/routes';
 import AppError from '@shared/errors/AppError';
 import { isCelebrateError } from 'celebrate';
+import swaggerUI from 'swagger-ui-express';
+import * as swaggerDocument from '@shared/infra/swagger/swagger.json';
 
 const app = express();
 
 app.use(express.json());
 app.use(routes);
+app.use('/swagger', swaggerUI.serve, swaggerUI.setup(swaggerDocument));
 app.use((error: Error, _: Request, response: Response, __: NextFunction) => {
   if (error instanceof AppError) {
     const { statusCode } = error;

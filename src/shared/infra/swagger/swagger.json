@@ -1,0 +1,368 @@
+{
+  "swagger": "2.0",
+  "schemes": [
+    "http",
+    "https"
+  ],
+  "host": "localhost:3333",
+  "basePath": "/",
+  "info": {
+    "version": "1.0.0",
+    "title": "GCB Doctor",
+    "description": "Application to register doctors",
+    "termsOfService": "https://gcbinvestimentos.com/",
+    "contact": {
+      "name": "Support",
+      "url": "https://gcbinvestimentos.com/",
+      "email": "support@gcbinvestimentos.com"
+    },
+    "license": {
+      "name": "MIT",
+      "url": "http://opensource.org/licenses/MIT"
+    }
+  },
+  "paths": {
+    "/doctors": {
+      "post": {
+        "summary": "Insert Doctor",
+        "description": "enter doctor's data",
+        "consumes": [
+          "application/json"
+        ],
+        "produces": [
+          "application/json"
+        ],
+        "operationId": "createDoctor",
+        "parameters": [
+          {
+            "in": "body",
+            "name": "doctor",
+            "schema": {
+              "type": "object",
+              "properties": {
+                "name": {
+                  "type": "string",
+                  "example": "Joao da Silva"
+                },
+                "crm": {
+                  "type": "string",
+                  "example": "75415"
+                },
+                "landline": {
+                  "type": "string",
+                  "example": "2733341475"
+                },
+                "mobile_phone": {
+                  "type": "string",
+                  "example": "27995848484"
+                },
+                "zip_code": {
+                  "type": "string",
+                  "example": "29032570"
+                },
+                "medical_specialty": {
+                  "type": "string",
+                  "example": "medical specialty id"
+                }
+              }
+            }
+          }
+        ],
+        "responses": {
+          "201": {
+            "description": "Registration was successfully entered",
+            "schema": {
+              "type": "object",
+              "properties": {
+                "name": {
+                  "type": "string",
+                  "example": "Joao da Silva"
+                },
+                "crm": {
+                  "type": "string",
+                  "example": "75415"
+                },
+                "landline": {
+                  "type": "string",
+                  "example": "3334-1475"
+                },
+                "mobile_phone": {
+                  "type": "string",
+                  "example": "27995848484"
+                },
+                "zip_code": {
+                  "type": "string",
+                  "example": "29032570"
+                },
+                "medical_specialty": {
+                  "type": "string",
+                  "example": "medical specialty id"
+                },
+                "createdAt": {
+                  "type": "Date"
+                },
+                "updatedAt": {
+                  "type": "Date"
+                },
+                "cep": {
+                  "type": "string",
+                  "example": "medical specialty id"
+                },
+                "logradouro": {
+                  "type": "string",
+                  "example": "Rua América do Sul"
+                },
+                "complemento": {
+                  "type": "string",
+                  "example": ""
+                },
+                "bairro": {
+                  "type": "string",
+                  "example": "Resistência"
+                },
+                "localidade": {
+                  "type": "string",
+                  "example": "Vitória"
+                },
+                "uf": {
+                  "type": "string",
+                  "example": "ES"
+                },
+                "ibge": {
+                  "type": "string",
+                  "example": "3205309"
+                },
+                "gia": {
+                  "type": "string",
+                  "example": ""
+                },
+                "ddd": {
+                  "type": "string",
+                  "example": "27"
+                },
+                "siafi": {
+                  "type": "string",
+                  "example": "5705"
+                }
+              }
+            }
+          },
+          "400": {
+            "description": "Invalid Request"
+          },
+          "500": {
+            "description": "Internal server error"
+          }
+        }
+      }
+    },
+    "/doctors/{id}": {
+      "get": {
+        "summary": "Show the doctor based on id",
+        "description": "show doctor",
+        "consumes": [
+          "application/json"
+        ],
+        "produces": [
+          "application/json"
+        ],
+        "operationId": "showDoctor",
+        "parameters": [
+          {
+            "in": "path",
+            "name": "id",
+            "schema": {
+              "type": "string"
+            },
+            "required": true
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Doctor found",
+            "schema": {
+              "type": "object",
+              "properties": {
+                "id": {
+                  "type": "string",
+                  "example": "26b25e69-b462-4391-b62d-59484ae0a48b"
+                },
+                "name": {
+                  "type": "string",
+                  "example": "Joao da Silva"
+                },
+                "crm": {
+                  "type": "string",
+                  "example": "75415"
+                },
+                "landline": {
+                  "type": "string",
+                  "example": "2733341475"
+                },
+                "mobilePhone": {
+                  "type": "string",
+                  "example": "27995848484"
+                },
+                "zipCode": {
+                  "type": "string",
+                  "example": "29032570"
+                },
+                "medicalSpecialty": {
+                  "type": "string",
+                  "example": "0d83096e-505b-4d3b-a3ba-94832dd5c4e5"
+                },
+                "createdAt": {
+                  "type": "string",
+                  "example": "2021-06-11T15:55:26.075Z"
+                },
+                "updatedAt": {
+                  "type": "string",
+                  "example": "2021-06-11T15:55:26.075Z"
+                },
+                "deletedAt": {
+                  "type": "string",
+                  "example": "null"
+                }
+              }
+            }
+          },
+          "500": {
+            "description": "Internal server error"
+          }
+        }
+      },
+      "put": {
+        "summary": "Updates the doctor's record based on the id",
+        "description": "update doctor",
+        "consumes": [
+          "application/json"
+        ],
+        "produces": [
+          "application/json"
+        ],
+        "operationId": "updateDoctor",
+        "parameters": [
+          {
+            "in": "path",
+            "name": "id",
+            "schema": {
+              "type": "string"
+            },
+            "required": true
+          },
+          {
+            "in": "body",
+            "name": "doctor",
+            "schema": {
+              "type": "object",
+              "properties": {
+                "name": {
+                  "type": "string",
+                  "example": "Joao da Silva"
+                },
+                "crm": {
+                  "type": "string",
+                  "example": "75415"
+                },
+                "landline": {
+                  "type": "string",
+                  "example": "2733341475"
+                },
+                "mobile_phone": {
+                  "type": "string",
+                  "example": "27995848484"
+                },
+                "zip_code": {
+                  "type": "string",
+                  "example": "29032570"
+                },
+                "medical_specialty": {
+                  "type": "string",
+                  "example": "medical specialty id"
+                }
+              }
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "updated registration",
+            "schema": {
+              "type": "object",
+              "properties": {
+                "id": {
+                  "type": "string",
+                  "example": "26b25e69-b462-4391-b62d-59484ae0a48b"
+                },
+                "name": {
+                  "type": "string",
+                  "example": "Maria Pereira"
+                },
+                "crm": {
+                  "type": "string",
+                  "example": "75415"
+                },
+                "landline": {
+                  "type": "string",
+                  "example": "2733341475"
+                },
+                "mobilePhone": {
+                  "type": "string",
+                  "example": "27995848484"
+                },
+                "zipCode": {
+                  "type": "string",
+                  "example": "29032570"
+                },
+                "medicalSpecialty": {
+                  "type": "string",
+                  "example": "0d83096e-505b-4d3b-a3ba-94832dd5c4e5"
+                },
+                "createdAt": {
+                  "type": "string",
+                  "example": "2021-06-11T15:55:26.075Z"
+                },
+                "updatedAt": {
+                  "type": "string",
+                  "example": "2021-06-11T15:55:26.075Z"
+                },
+                "deletedAt": {
+                  "type": "string",
+                  "example": "null"
+                }
+              }
+            }
+          },
+          "500": {
+            "description": "Internal server error"
+          }
+        }
+      },
+      "parameters": [
+        {
+          "in": "path",
+          "name": "id",
+          "schema": {
+            "type": "string"
+          },
+          "required": true,
+          "description": "Remove registration"
+        }
+      ],
+      "delete": {
+        "summary": "Remove registration",
+        "responses": {
+          "204": {
+            "description": "The registration was successfully deleted"
+          },
+          "400": {
+            "description": "ID not found"
+          },
+          "500": {
+            "description": "Internal server error"
+          }
+        }
+      }
+    }
+  }
+}
