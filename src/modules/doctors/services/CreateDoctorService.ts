@@ -40,8 +40,8 @@ export default class CreateDoctorService {
 
     const { data } = await axios(`https://viacep.com.br/ws/${zipCode}/json/`);
 
-    const teste = Object.assign(doctor, data);
+    const doctorAndAddress = Object.assign(doctor, data);
 
-    return teste;
+    return doctorAndAddress;
   }
 }
