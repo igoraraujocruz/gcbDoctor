@@ -64,6 +64,7 @@ export default class DoctorsRepository implements IDoctorsRepository {
   public async findById(id: string): Promise<Doctor | undefined> {
     const findId = await this.ormRepository.findOne({
       where: { id },
+      relations: ['medicalSpecialty'],
     });
     return findId;
   }

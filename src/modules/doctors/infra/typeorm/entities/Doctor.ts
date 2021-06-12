@@ -5,8 +5,8 @@ import {
   CreateDateColumn,
   UpdateDateColumn,
   DeleteDateColumn,
-  OneToMany,
-  JoinColumn,
+  ManyToMany,
+  JoinTable,
 } from 'typeorm';
 import MedicalSpecialty from './MedicalSpecialty';
 
@@ -30,15 +30,17 @@ export default class Doctor {
   @Column({ name: 'zip_code' })
   zipCode: string;
 
-  @Column({ name: 'medical_specialty' })
-  medicalSpecialty: string;
-
-  @OneToMany(
-    () => MedicalSpecialty,
-    medicalSpecialty => medicalSpecialty.doctor,
-  )
-  @JoinColumn({ name: 'medicalSpecialty' })
-  medicalSpecialties: MedicalSpecialty[];
+  @ManyToMany(() => MedicalSpecialty)
+  @JoinTable({
+    name: 'doctors_medical_specialities',
+    joinColumn: {
+      name: 'doctor_id',
+    },
+    inverseJoinColumn: {
+      name: 'medical_specialty_id',
+    },
+  })
+  medicalSpecialty: MedicalSpecialty[];
 
   @CreateDateColumn({ name: 'created_at' })
   createdAt: Date;

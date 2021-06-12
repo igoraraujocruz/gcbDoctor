@@ -14,7 +14,7 @@ doctorsRouter.post(
       landline: Joi.number().required(),
       mobile_phone: Joi.number().required(),
       zip_code: Joi.number().required(),
-      medical_specialty: Joi.string().required(),
+      medical_specialty: Joi.array().required(),
     },
   }),
   doctorsController.create,

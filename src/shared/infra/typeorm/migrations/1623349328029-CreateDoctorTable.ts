@@ -41,10 +41,6 @@ export default class CreateDoctorTable1623349328029
             length: '8',
           },
           {
-            name: 'medical_specialty',
-            type: 'uuid',
-          },
-          {
             name: 'created_at',
             type: 'timestamp',
             default: 'now()',
@@ -58,16 +54,6 @@ export default class CreateDoctorTable1623349328029
             name: 'deleted_at',
             type: 'timestamp',
             isNullable: true,
-          },
-        ],
-        foreignKeys: [
-          {
-            name: 'medical_specialtyForeignKey',
-            referencedTableName: 'medical_specialty',
-            referencedColumnNames: ['id'],
-            columnNames: ['medical_specialty'],
-            onDelete: 'SET NULL',
-            onUpdate: 'CASCADE',
           },
         ],
       }),

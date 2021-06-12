@@ -5,10 +5,7 @@ import {
   CreateDateColumn,
   UpdateDateColumn,
   DeleteDateColumn,
-  ManyToOne,
 } from 'typeorm';
-
-import Doctor from './Doctor';
 
 @Entity('medical_specialty')
 export default class MedicalSpecialty {
@@ -17,9 +14,6 @@ export default class MedicalSpecialty {
 
   @Column()
   name: string;
-
-  @ManyToOne(() => Doctor, doctor => doctor.medicalSpecialties)
-  doctor: Doctor;
 
   @CreateDateColumn({ name: 'created_at' })
   createdAt: Date;
