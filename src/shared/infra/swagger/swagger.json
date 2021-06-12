@@ -61,8 +61,17 @@
                   "example": "29032570"
                 },
                 "medical_specialty": {
-                  "type": "string",
-                  "example": "medical specialty id"
+                  "type": "array",
+                  "example": [
+                    [
+                      {
+                      "id": "cceba963-7d90-4259-9530-17dc20c06863"
+                      },
+                      {
+                      "id": "e9eef370-c202-4336-b5d6-efbbafdd2ccc"
+                      }
+                    ]
+                  ]
                 }
               }
             }
@@ -95,8 +104,16 @@
                   "example": "29032570"
                 },
                 "medical_specialty": {
-                  "type": "string",
-                  "example": "medical specialty id"
+                  "type": "array",
+                  "example":
+                    [
+                      {
+                      "id": "cceba963-7d90-4259-9530-17dc20c06863"
+                      },
+                      {
+                      "id": "e9eef370-c202-4336-b5d6-efbbafdd2ccc"
+                      }
+                    ]
                 },
                 "createdAt": {
                   "type": "Date"
@@ -106,7 +123,7 @@
                 },
                 "cep": {
                   "type": "string",
-                  "example": "medical specialty id"
+                  "example": "29032-570"
                 },
                 "logradouro": {
                   "type": "string",
@@ -208,8 +225,23 @@
                   "example": "29032570"
                 },
                 "medicalSpecialty": {
-                  "type": "string",
-                  "example": "0d83096e-505b-4d3b-a3ba-94832dd5c4e5"
+                  "type": "array",
+                  "example": [
+                    {
+                      "id": "cceba963-7d90-4259-9530-17dc20c06863",
+                      "name": "Alergologia",
+                      "createdAt": "2021-06-12T06:32:06.575Z",
+                      "updatedAt": "2021-06-12T06:32:06.575Z",
+                      "deletedAt": null
+                    },
+                      {
+                      "id": "e9eef370-c202-4336-b5d6-efbbafdd2ccc",
+                      "name": "Angiologia",
+                      "createdAt": "2021-06-12T06:32:06.575Z",
+                      "updatedAt": "2021-06-12T06:32:06.575Z",
+                      "deletedAt": null
+                      }
+                  ]
                 },
                 "createdAt": {
                   "type": "string",
@@ -278,7 +310,7 @@
                 },
                 "medical_specialty": {
                   "type": "string",
-                  "example": "medical specialty id"
+                  "example": "0d83096e-505b-4d3b-a3ba-94832dd5c4e5"
                 }
               }
             }
