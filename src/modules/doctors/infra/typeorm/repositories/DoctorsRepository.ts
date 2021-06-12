@@ -1,7 +1,7 @@
 import { getRepository, Repository } from 'typeorm';
 import IDoctorsRepository from '@modules/doctors/repositories/IDoctorsRepository';
 import Doctor from '@modules/doctors/infra/typeorm/entities/Doctor';
-import IDoctorDTO from '@modules/doctors/dtos/IDoctorDTO';
+import DoctorDTO from '@modules/doctors/dtos/DoctorDTO';
 
 export default class DoctorsRepository implements IDoctorsRepository {
   private ormRepository: Repository<Doctor>;
@@ -17,7 +17,7 @@ export default class DoctorsRepository implements IDoctorsRepository {
     medicalSpecialty,
     mobilePhone,
     zipCode,
-  }: IDoctorDTO): Promise<Doctor> {
+  }: DoctorDTO): Promise<Doctor> {
     const user = this.ormRepository.create({
       name,
       crm,
@@ -38,7 +38,7 @@ export default class DoctorsRepository implements IDoctorsRepository {
     medicalSpecialty,
     mobilePhone,
     zipCode,
-  }: IDoctorDTO): Promise<Doctor> {
+  }: DoctorDTO): Promise<Doctor> {
     const doctor = await this.ormRepository.findOne({
       where: { id },
     });

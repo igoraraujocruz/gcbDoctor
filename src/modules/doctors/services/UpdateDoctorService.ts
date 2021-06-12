@@ -1,7 +1,7 @@
 import { inject, injectable } from 'tsyringe';
 import Doctor from '@modules/doctors/infra/typeorm/entities/Doctor';
 import IDoctorsRepository from '@modules/doctors/repositories/IDoctorsRepository';
-import IDoctorDTO from '@modules/doctors/dtos/IDoctorDTO';
+import DoctorDTO from '@modules/doctors/dtos/DoctorDTO';
 
 @injectable()
 export default class UpdateDoctorService {
@@ -18,7 +18,7 @@ export default class UpdateDoctorService {
     medicalSpecialty,
     mobilePhone,
     zipCode,
-  }: IDoctorDTO): Promise<Doctor> {
+  }: DoctorDTO): Promise<Doctor> {
     const doctor = await this.doctorsRepository.update({
       id,
       name,

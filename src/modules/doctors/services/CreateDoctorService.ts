@@ -1,7 +1,7 @@
 import { inject, injectable } from 'tsyringe';
 import Doctor from '@modules/doctors/infra/typeorm/entities/Doctor';
 import IDoctorsRepository from '@modules/doctors/repositories/IDoctorsRepository';
-import IDoctorDTO from '@modules/doctors/dtos/IDoctorDTO';
+import DoctorDTO from '@modules/doctors/dtos/DoctorDTO';
 import AppError from '@shared/errors/AppError';
 import axios from 'axios';
 
@@ -19,7 +19,7 @@ export default class CreateDoctorService {
     medicalSpecialty,
     mobilePhone,
     zipCode,
-  }: IDoctorDTO): Promise<Doctor> {
+  }: DoctorDTO): Promise<Doctor> {
     if (name.length > 120) {
       throw new AppError('name must contain fewer characters');
     }

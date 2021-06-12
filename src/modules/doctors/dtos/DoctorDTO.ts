@@ -1,6 +1,6 @@
 import MedicalSpecialty from '../infra/typeorm/entities/MedicalSpecialty';
 
-export default interface IDoctorDTO {
+export default interface DoctorDTO {
   id?: string;
   name: string;
   crm: string;

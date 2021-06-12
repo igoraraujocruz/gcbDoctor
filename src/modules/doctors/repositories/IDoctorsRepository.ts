@@ -1,9 +1,9 @@
 import Doctor from '@modules/doctors/infra/typeorm/entities/Doctor';
-import IDoctorDTO from '@modules/doctors/dtos/IDoctorDTO';
+import DoctorDTO from '@modules/doctors/dtos/DoctorDTO';
 
 export default interface IDoctorsRepository {
-  create(data: IDoctorDTO): Promise<Doctor>;
-  update(data: IDoctorDTO): Promise<Doctor>;
+  create(data: DoctorDTO): Promise<Doctor>;
+  update(data: DoctorDTO): Promise<Doctor>;
   delete(id: string): Promise<void>;
   findById(id: string): Promise<Doctor | undefined>;
 }
