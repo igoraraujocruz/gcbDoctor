@@ -14,3 +14,5 @@ module.exports = {
         "migrationsDir": `./${dir}/shared/infra/typeorm/migrations/`
     }
 }
+
+
