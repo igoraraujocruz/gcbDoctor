@@ -1,0 +1,47 @@
+version: '3'
+
+services:
+  server:
+    build: .
+    container_name: server
+    command: sh -c "sleep 10s && yarn start"
+    volumes:
+      - .:/home/node/api
+      - /home/node/api/node_modules
+    ports:
+      - ${APP_PORT}:${APP_PORT}
+    depends_on:
+      - postgres
+      - migrations
+    networks:
+      - gcb-network
+
+  postgres:
+    image: postgres:13.2-alpine
+    container_name: postgres
+    environment:
+      POSTGRES_USER: ${DB_USER}
+      POSTGRES_PASSWORD: ${DB_PASS}
+      POSTGRES_DB: ${DB_NAME}
+    volumes:
+      - postgres-data:/data
+    networks:
+      - gcb-network
+    ports:
+      - ${DB_PORT}:5432
+
+  migrations:
+    build: .
+    command: sh -c "dockerize -wait tcp://postgres:5432 -timeout 300s -wait-retry-interval 1s && yarn typeorm migration:run"
+    container_name: migrations
+    depends_on:
+      - postgres
+    networks:
+      - gcb-network
+
+volumes:
+  postgres-data:
+
+networks:
+  gcb-network:
+    driver: bridge
