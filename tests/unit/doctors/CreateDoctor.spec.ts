@@ -1,24 +1,53 @@
 import CreateDoctorService from '@modules/doctors/services/CreateDoctorService';
+import MedicalSpecialty from '@modules/doctors/infra/typeorm/entities/MedicalSpecialty';
 import AppError from '@shared/errors/AppError';
 import FakeDoctorRepository from './fakes/FakeDoctorRepository';
+import FakeMedicalSpecialtyRepository from './fakes/FakeMedicalSpecialtyRepository';
 import FakerData from '../../utils/FakerData';
 
+const medicalSpecialtiesSeeds = [
+  'Alergologia',
+  'Angiologia',
+  'Buco maxilo',
+  'Cardiologia clínica',
+  'Cardiologia infantil',
+  'Cirurgia cabeça e pescoço',
+  'Cirurgia cardíaca',
+  'Cirurgia de tórax',
+];
+
 let fakeDoctorRepository: FakeDoctorRepository;
+let fakeMedicalSpecialtyRepository: FakeMedicalSpecialtyRepository;
 let createDoctorService: CreateDoctorService;
+
+let medicalSpecialties: MedicalSpecialty[];
 
 const faker = new FakerData();
 
 describe('CreateDoctor', () => {
-  beforeEach(() => {
-    fakeDoctorRepository = new FakeDoctorRepository();
-    createDoctorService = new CreateDoctorService(fakeDoctorRepository);
+  beforeAll(async () => {
+    fakeMedicalSpecialtyRepository = new FakeMedicalSpecialtyRepository(
+      medicalSpecialtiesSeeds,
+    );
+    medicalSpecialties = await fakeMedicalSpecialtyRepository.index();
   });
 
-  it('Should be able to register the doctor', async () => {
+  beforeEach(() => {
+    fakeDoctorRepository = new FakeDoctorRepository();
+    createDoctorService = new CreateDoctorService(
+      fakeDoctorRepository,
+      fakeMedicalSpecialtyRepository,
+    );
+  });
+
+  it('Should be able to register a new doctor', async () => {
     const name = faker.generateName();
     const crm = faker.generateNumber();
     const landline = faker.generatePhoneNumber();
-    const medicalSpecialty = faker.generateUuid();
+    const medicalSpecialty = [
+      medicalSpecialties[1].id,
+      medicalSpecialties[2].id,
+    ];
     const mobilePhone = faker.generatePhoneNumber();
     const zipCode = faker.generateCep();
 
@@ -26,7 +55,7 @@ describe('CreateDoctor', () => {
       name,
       crm,
       landline,
-      medicalSpecialty: [],
+      medicalSpecialty,
       mobilePhone,
       zipCode,
     });
@@ -39,31 +68,49 @@ describe('CreateDoctor', () => {
     expect(doctor.zipCode).toEqual(zipCode);
   });
 
-  it('Should not be able to register the doctor if the name is longer than 120 characters', async () => {
-    const name = faker.generateName();
+  it('Should not be able to register a doctor if name was more then 120 caracters', async () => {
+    const name =
+      'adsasdadsadadhasuydgausydgasuydgauysdguasydgausygdausygdauysdguasgduyasgdiuaysgduasygduasygduaysgduyasgduyasgduyasgduyasg';
     const crm = faker.generateNumber();
     const landline = faker.generatePhoneNumber();
-    const medicalSpecialty = [faker.generateUuid()];
+    const medicalSpecialty = [
+      medicalSpecialties[1].id,
+      medicalSpecialties[2].id,
+    ];
     const mobilePhone = faker.generatePhoneNumber();
     const zipCode = faker.generateCep();
-
-    await fakeDoctorRepository.create({
-      name,
-      crm,
-      landline,
-      medicalSpecialty,
-      mobilePhone,
-      zipCode,
-    });
 
     await expect(
       createDoctorService.execute({
         name,
         crm,
         landline,
-        medicalSpecialty: [],
         mobilePhone,
         zipCode,
+        medicalSpecialty,
+      }),
+    ).rejects.toBeInstanceOf(AppError);
+  });
+
+  it('Should not be able to register a doctor if landline or mobilePhone type is different from number', async () => {
+    const name = faker.generateName();
+    const crm = faker.generateNumber();
+    const landline = faker.generatePhoneNumber();
+    const medicalSpecialty = [
+      medicalSpecialties[1].id,
+      medicalSpecialties[2].id,
+    ];
+    const mobilePhone = faker.generatePhoneNumber();
+    const zipCode = faker.generateCep();
+
+    await expect(
+      createDoctorService.execute({
+        name,
+        crm,
+        landline,
+        mobilePhone,
+        zipCode,
+        medicalSpecialty,
       }),
     ).rejects.toBeInstanceOf(AppError);
   });
