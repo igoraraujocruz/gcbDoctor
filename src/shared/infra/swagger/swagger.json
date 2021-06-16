@@ -22,10 +22,56 @@
     }
   },
   "paths": {
+    "/specialties": {
+      "get": {
+        "summary": "Shows all registered specialties",
+        "description": "Run to find the ID's of medical specialties",
+        "consumes": [
+          "application/json"
+        ],
+        "produces": [
+          "application/json"
+        ],
+        "operationId": "showSpecialty",
+        "responses": {
+          "200": {
+            "description": "Specialties",
+            "schema": {
+              "type": "object",
+              "properties": {
+                "id": {
+                  "type": "string",
+                  "example": "26b25e69-b462-4391-b62d-59484ae0a48b"
+                },
+                "name": {
+                  "type": "string",
+                  "example": "Alergologia"
+                },
+                "createdAt": {
+                  "type": "string",
+                  "example": "2021-06-11T15:55:26.075Z"
+                },
+                "updatedAt": {
+                  "type": "string",
+                  "example": "2021-06-11T15:55:26.075Z"
+                },
+                "deletedAt": {
+                  "type": "string",
+                  "example": "null"
+                }
+              }
+            }
+          },
+          "500": {
+            "description": "Internal server error"
+          }
+        }
+      }
+    },
     "/doctors": {
       "post": {
         "summary": "Insert Doctor",
-        "description": "enter doctor's data",
+        "description": "Insert at least two medical specialties ID in the requisition body",
         "consumes": [
           "application/json"
         ],
@@ -78,7 +124,7 @@
           }
         ],
         "responses": {
-          "201": {
+          "200": {
             "description": "Registration was successfully entered",
             "schema": {
               "type": "object",
@@ -265,7 +311,7 @@
       },
       "put": {
         "summary": "Updates the doctor's record based on the id",
-        "description": "update doctor",
+        "description": "Enter a valid Doctor ID, change the request body and run for the changes to be saved",
         "consumes": [
           "application/json"
         ],
@@ -383,6 +429,7 @@
       ],
       "delete": {
         "summary": "Remove registration",
+        "description": "Please enter a valid Doctor ID and run to make the record soft delete",
         "responses": {
           "204": {
             "description": "The registration was successfully deleted"
