@@ -15,10 +15,14 @@ export default class Doctor {
   @PrimaryGeneratedColumn('uuid')
   id: string;
 
-  @Column()
+  @Column({
+    length: 120,
+  })
   name: string;
 
-  @Column()
+  @Column({
+    length: 7,
+  })
   crm: string;
 
   @Column()
@@ -40,7 +44,7 @@ export default class Doctor {
       name: 'medical_specialty_id',
     },
   })
-  medicalSpecialty: string[];
+  medicalSpecialty: MedicalSpecialty[];
 
   @CreateDateColumn({ name: 'created_at' })
   createdAt: Date;

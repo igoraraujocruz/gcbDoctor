@@ -9,7 +9,7 @@ doctorsRouter.post(
   '/',
   celebrate({
     [Segments.BODY]: {
-      name: Joi.string().required(),
+      name: Joi.string().max(120).required(),
       crm: Joi.number().required(),
       landline: Joi.number().required(),
       mobile_phone: Joi.number().required(),

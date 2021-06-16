@@ -24,12 +24,17 @@ export default class CreateDoctorService {
     mobilePhone,
     zipCode,
   }: DoctorDTO): Promise<Doctor> {
-    if (name.length > 120) {
-      throw new AppError('name must contain fewer characters');
+    const findSpecialties =
+      await this.medicalSpecialtiesRepository.findSpecialties(medicalSpecialty);
+
+    if (findSpecialties.length !== medicalSpecialty.length) {
+      throw new AppError('Speciality not found');
     }
-    if (crm.toString().length > 7) {
-      throw new AppError('crm must contain fewer characters');
+
+    if (findSpecialties.length < 2) {
+      throw new AppError('It takes at least two specialties');
     }
+
     if (typeof landline && typeof mobilePhone !== 'number') {
       throw new AppError('must be a number');
     }
@@ -38,7 +43,7 @@ export default class CreateDoctorService {
       name,
       crm,
       landline,
-      medicalSpecialty,
+      medicalSpecialty: findSpecialties,
       mobilePhone,
       zipCode,
     });
