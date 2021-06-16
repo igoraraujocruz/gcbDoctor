@@ -40,7 +40,7 @@ export default class Doctor {
       name: 'medical_specialty_id',
     },
   })
-  medicalSpecialty: MedicalSpecialty[];
+  medicalSpecialty: string[];
 
   @CreateDateColumn({ name: 'created_at' })
   createdAt: Date;
