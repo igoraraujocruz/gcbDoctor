@@ -1,6 +1,7 @@
 import { inject, injectable } from 'tsyringe';
 import Doctor from '@modules/doctors/infra/typeorm/entities/Doctor';
 import IDoctorsRepository from '@modules/doctors/repositories/IDoctorsRepository';
+import IMedicalSpecialtiesRepository from '@modules/doctors/repositories/IMedicalSpecialtiesRepository';
 import DoctorDTO from '@modules/doctors/dtos/DoctorDTO';
 import AppError from '@shared/errors/AppError';
 import axios from 'axios';
@@ -10,6 +11,9 @@ export default class CreateDoctorService {
   constructor(
     @inject('DoctorsRepository')
     private doctorsRepository: IDoctorsRepository,
+
+    @inject('MedicalSpecialtiesRepository')
+    private medicalSpecialtiesRepository: IMedicalSpecialtiesRepository,
   ) {}
 
   public async execute({
@@ -29,6 +33,7 @@ export default class CreateDoctorService {
     if (typeof landline && typeof mobilePhone !== 'number') {
       throw new AppError('must be a number');
     }
+
     const doctor = await this.doctorsRepository.create({
       name,
       crm,
