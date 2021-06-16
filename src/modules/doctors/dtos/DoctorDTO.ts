@@ -1,5 +1,3 @@
-import MedicalSpecialty from '../infra/typeorm/entities/MedicalSpecialty';
-
 export default interface DoctorDTO {
   id?: string;
   name: string;
@@ -7,5 +5,5 @@ export default interface DoctorDTO {
   landline: string;
   mobilePhone: string;
   zipCode: string;
-  medicalSpecialty: MedicalSpecialty[];
+  medicalSpecialty: string[];
 }
