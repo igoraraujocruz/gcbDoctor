@@ -31,7 +31,7 @@ describe('Delete Doctor', () => {
     fakeMedicalSpecialtyRepository = new FakeMedicalSpecialtyRepository(
       medicalSpecialtiesSeeds,
     );
-    medicalSpecialties = await fakeMedicalSpecialtyRepository.index();
+    medicalSpecialties = await fakeMedicalSpecialtyRepository.findAll();
   });
 
   beforeEach(() => {
