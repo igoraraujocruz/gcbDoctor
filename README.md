@@ -14,6 +14,12 @@ Antes de começar você deve ter instalado em sua máquina o [Docker-compose](ht
 ### 🎲 Como começar?
 
 ```bash
+# Clone o repositório e acesse a pasta pelo terminal
+$ git clone https://github.com/igoraraujocruz/gcbDoctor.git
+$ cd gcbDoctor
+
+# Crie um arquivo .env na raiz do projeto, copie todo o conteúdo do arquivo .env.exemple e cole no .env para "setarmos" as variáveis de ambiente, ou insira as variáveis que preferir.
+
 # Com o Docker-compose instalado, execute o seguinte comando para buildas as imagens.
 $ make start #caso esteja no linux: sudo make start
 
