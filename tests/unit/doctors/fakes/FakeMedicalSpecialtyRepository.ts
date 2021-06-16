@@ -17,7 +17,7 @@ export default class FakeMedicalSpecialtyRepository {
     });
   }
 
-  public async index(): Promise<MedicalSpecialty[]> {
+  public async findAll(): Promise<MedicalSpecialty[]> {
     return [...this.medicalSpecialties];
   }
 }
