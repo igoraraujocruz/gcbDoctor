@@ -26,12 +26,10 @@ $ make start #caso esteja no linux: sudo make start
 # Aguarde todo o processo finalizar. Logo depois, o server automaticamente irá inicializar e já será possível acessar a documentação swagger.
 http://localhost:3333/swagger/
 
-# Para as requisições POST será necessário conhecer o ID que foi automaticamente gerado da tabela de especialidades. Para isso clique na aba /specialties, try it out e execute. Após executar descobriremos os ID's. Vou deixar um gif abaixo, caso seja necessário.
 
 # Agora é só testar a aplicação, caso tenha alguma dúvida, fique a vontade para perguntar, meus contatos estão logo a baixo.
 
 ```
-![](tutorial/tuto.gif)
 
 </br>
 
