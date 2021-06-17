@@ -1,6 +1,7 @@
 import { Request, Response } from 'express';
 import { container } from 'tsyringe';
 import CreateDoctorService from '@modules/doctors/services/CreateDoctorService';
+import CreateAddressService from '@modules/doctors/services/CreateAddressService';
 import UpdateDoctorService from '@modules/doctors/services/UpdateDoctorService';
 import DeleteDoctorService from '@modules/doctors/services/DeleteDoctorService';
 import SelectDoctorService from '@modules/doctors/services/SelectDoctorService';
@@ -10,6 +11,10 @@ export default class DoctorsController {
     const { name, crm, landline, medical_specialty, mobile_phone, zip_code } =
       request.body;
 
+    const createAddress = container.resolve(CreateAddressService);
+
+    const doctorAddress = await createAddress.execute(zip_code);
+
     const createDoctor = container.resolve(CreateDoctorService);
 
     const doctor = await createDoctor.execute({
@@ -18,7 +23,7 @@ export default class DoctorsController {
       landline,
       medicalSpecialty: medical_specialty,
       mobilePhone: mobile_phone,
-      zipCode: zip_code,
+      address: doctorAddress,
     });
 
     return response.status(200).json(doctor);

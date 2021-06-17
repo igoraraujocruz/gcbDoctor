@@ -1,12 +1,12 @@
 import { MigrationInterface, QueryRunner, Table } from 'typeorm';
 
-export default class CreateDoctorTable1623349328029
+export default class CreateMedicalSpecialtyTable1623895329503
   implements MigrationInterface
 {
   public async up(queryRunner: QueryRunner): Promise<void> {
     await queryRunner.createTable(
       new Table({
-        name: 'doctors',
+        name: 'medical_specialty',
         columns: [
           {
             name: 'id',
@@ -18,27 +18,6 @@ export default class CreateDoctorTable1623349328029
           {
             name: 'name',
             type: 'varchar',
-            length: '120',
-          },
-          {
-            name: 'crm',
-            type: 'varchar',
-            length: '7',
-          },
-          {
-            name: 'landline',
-            type: 'varchar',
-            length: '10',
-          },
-          {
-            name: 'mobile_phone',
-            type: 'varchar',
-            length: '11',
-          },
-          {
-            name: 'zip_code',
-            type: 'varchar',
-            length: '8',
           },
           {
             name: 'created_at',
@@ -58,9 +37,16 @@ export default class CreateDoctorTable1623349328029
         ],
       }),
     );
+    await queryRunner.query(
+      `INSERT INTO medical_specialty (name) VALUES ('Alergologia'), ('Angiologia'), ('Buco maxilo'), ('Cardiologia clínica'), ('Cardiologia infantil'), ('Cirurgia cabeça e pescoço'), ('Cirurgia cardíaca'), ('Cirurgia de tórax')`,
+    );
   }
 
   public async down(queryRunner: QueryRunner): Promise<void> {
-    await queryRunner.dropTable('doctors');
+    await queryRunner.query(
+      `DELETE FROM medical_specialty
+      WHERE name IN ('Alergologia', 'Angiologia', 'Buco maxilo', 'Cardiologia clínica', 'Cardiologia infantil', 'Cirurgia cabeça e pescoço', 'Cirurgia cardíaca', 'Cirurgia de tórax')`,
+    );
+    await queryRunner.dropTable('medical_specialty');
   }
 }

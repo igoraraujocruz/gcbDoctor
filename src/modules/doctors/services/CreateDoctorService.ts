@@ -4,7 +4,6 @@ import IDoctorsRepository from '@modules/doctors/repositories/IDoctorsRepository
 import IMedicalSpecialtiesRepository from '@modules/doctors/repositories/IMedicalSpecialtiesRepository';
 import CreateDoctorDTO from '@modules/doctors/dtos/CreateDoctorDTO';
 import AppError from '@shared/errors/AppError';
-import axios from 'axios';
 
 @injectable()
 export default class CreateDoctorService {
@@ -22,7 +21,7 @@ export default class CreateDoctorService {
     landline,
     medicalSpecialty,
     mobilePhone,
-    zipCode,
+    address,
   }: CreateDoctorDTO): Promise<Doctor> {
     const findSpecialties =
       await this.medicalSpecialtiesRepository.findSpecialties(medicalSpecialty);
@@ -45,13 +44,9 @@ export default class CreateDoctorService {
       landline,
       medicalSpecialty: findSpecialties,
       mobilePhone,
-      zipCode,
+      address,
     });
 
-    const { data } = await axios(`https://viacep.com.br/ws/${zipCode}/json/`);
-
-    const doctorAndAddress = Object.assign(doctor, data);
-
-    return doctorAndAddress;
+    return doctor;
   }
 }

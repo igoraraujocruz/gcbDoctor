@@ -7,8 +7,11 @@ import {
   DeleteDateColumn,
   ManyToMany,
   JoinTable,
+  ManyToOne,
+  JoinColumn,
 } from 'typeorm';
 import MedicalSpecialty from './MedicalSpecialty';
+import Address from './Address';
 
 @Entity('doctors')
 export default class Doctor {
@@ -31,8 +34,12 @@ export default class Doctor {
   @Column({ name: 'mobile_phone' })
   mobilePhone: string;
 
-  @Column({ name: 'zip_code' })
-  zipCode: string;
+  @ManyToOne(() => Address, {
+    cascade: ['insert', 'update'],
+    eager: true,
+  })
+  @JoinColumn({ name: 'address_id' })
+  address: Address;
 
   @ManyToMany(() => MedicalSpecialty)
   @JoinTable({

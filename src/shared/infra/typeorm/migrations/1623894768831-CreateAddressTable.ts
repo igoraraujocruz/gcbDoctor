@@ -1,12 +1,12 @@
 import { MigrationInterface, QueryRunner, Table } from 'typeorm';
 
-export default class CreateMedicalSpecialtyTable1623343195401
+export default class CreateAddressTable1623894768831
   implements MigrationInterface
 {
   public async up(queryRunner: QueryRunner): Promise<void> {
     await queryRunner.createTable(
       new Table({
-        name: 'medical_specialty',
+        name: 'address',
         columns: [
           {
             name: 'id',
@@ -15,9 +15,37 @@ export default class CreateMedicalSpecialtyTable1623343195401
             generationStrategy: 'uuid',
             default: 'uuid_generate_v4()',
           },
+
           {
-            name: 'name',
+            name: 'cep',
             type: 'varchar',
+          },
+          {
+            name: 'state',
+            type: 'char(2)',
+          },
+          {
+            name: 'city',
+            type: 'varchar',
+          },
+          {
+            name: 'district',
+            isNullable: true,
+            type: 'varchar',
+          },
+          {
+            name: 'street',
+            type: 'varchar',
+          },
+          {
+            name: 'number',
+            isNullable: true,
+            type: 'varchar',
+          },
+          {
+            name: 'complementary',
+            type: 'varchar',
+            isNullable: true,
           },
           {
             name: 'created_at',
@@ -37,16 +65,9 @@ export default class CreateMedicalSpecialtyTable1623343195401
         ],
       }),
     );
-    await queryRunner.query(
-      `INSERT INTO medical_specialty (name) VALUES ('Alergologia'), ('Angiologia'), ('Buco maxilo'), ('Cardiologia clínica'), ('Cardiologia infantil'), ('Cirurgia cabeça e pescoço'), ('Cirurgia cardíaca'), ('Cirurgia de tórax')`,
-    );
   }
 
   public async down(queryRunner: QueryRunner): Promise<void> {
-    await queryRunner.query(
-      `DELETE FROM medical_specialty
-      WHERE name IN ('Alergologia', 'Angiologia', 'Buco maxilo', 'Cardiologia clínica', 'Cardiologia infantil', 'Cirurgia cabeça e pescoço', 'Cirurgia cardíaca', 'Cirurgia de tórax')`,
-    );
-    await queryRunner.dropTable('medical_specialty');
+    await queryRunner.dropTable('address');
   }
 }

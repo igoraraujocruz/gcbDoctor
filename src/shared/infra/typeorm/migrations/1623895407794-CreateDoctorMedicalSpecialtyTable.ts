@@ -1,6 +1,6 @@
 import { MigrationInterface, QueryRunner, Table } from 'typeorm';
 
-export default class CreateDoctorMedicalSpecialty1623465740876
+export default class CreateDoctorMedicalSpecialtyTable1623895407794
   implements MigrationInterface
 {
   public async up(queryRunner: QueryRunner): Promise<void> {
