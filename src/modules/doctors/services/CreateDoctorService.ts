@@ -2,7 +2,7 @@ import { inject, injectable } from 'tsyringe';
 import Doctor from '@modules/doctors/infra/typeorm/entities/Doctor';
 import IDoctorsRepository from '@modules/doctors/repositories/IDoctorsRepository';
 import IMedicalSpecialtiesRepository from '@modules/doctors/repositories/IMedicalSpecialtiesRepository';
-import DoctorDTO from '@modules/doctors/dtos/DoctorDTO';
+import CreateDoctorDTO from '@modules/doctors/dtos/CreateDoctorDTO';
 import AppError from '@shared/errors/AppError';
 import axios from 'axios';
 
@@ -23,7 +23,7 @@ export default class CreateDoctorService {
     medicalSpecialty,
     mobilePhone,
     zipCode,
-  }: DoctorDTO): Promise<Doctor> {
+  }: CreateDoctorDTO): Promise<Doctor> {
     const findSpecialties =
       await this.medicalSpecialtiesRepository.findSpecialties(medicalSpecialty);
 

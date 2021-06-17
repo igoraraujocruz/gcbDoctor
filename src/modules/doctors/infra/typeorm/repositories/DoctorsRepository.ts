@@ -1,7 +1,6 @@
 import { getRepository, Repository } from 'typeorm';
 import IDoctorsRepository from '@modules/doctors/repositories/IDoctorsRepository';
 import Doctor from '@modules/doctors/infra/typeorm/entities/Doctor';
-import DoctorDTO from '@modules/doctors/dtos/DoctorDTO';
 
 export default class DoctorsRepository implements IDoctorsRepository {
   private ormRepository: Repository<Doctor>;
@@ -10,50 +9,8 @@ export default class DoctorsRepository implements IDoctorsRepository {
     this.ormRepository = getRepository(Doctor);
   }
 
-  public async create({
-    name,
-    crm,
-    landline,
-    medicalSpecialty,
-    mobilePhone,
-    zipCode,
-  }: DoctorDTO): Promise<Doctor> {
-    const user = this.ormRepository.create({
-      name,
-      crm,
-      landline,
-      medicalSpecialty,
-      mobilePhone,
-      zipCode,
-    });
-    await this.ormRepository.save(user);
-    return user;
-  }
-
-  public async update({
-    id,
-    name,
-    crm,
-    landline,
-    medicalSpecialty,
-    mobilePhone,
-    zipCode,
-  }: DoctorDTO): Promise<Doctor> {
-    const doctor = await this.ormRepository.findOne({
-      where: { id },
-    });
-
-    if (!doctor) {
-      throw new Error('doctor_id not found');
-    }
-
-    doctor.name = name;
-    doctor.crm = crm;
-    doctor.landline = landline;
-    doctor.medicalSpecialty = medicalSpecialty;
-    doctor.mobilePhone = mobilePhone;
-    doctor.zipCode = zipCode;
-
+  public async create(data: Partial<Doctor>): Promise<Doctor> {
+    const doctor = this.ormRepository.create(data);
     return this.ormRepository.save(doctor);
   }
 
@@ -69,7 +26,7 @@ export default class DoctorsRepository implements IDoctorsRepository {
     return findId;
   }
 
-  public async save(user: Doctor): Promise<Doctor> {
-    return this.ormRepository.save(user);
+  public async save(doctor: Doctor): Promise<Doctor> {
+    return this.ormRepository.save(doctor);
   }
 }
