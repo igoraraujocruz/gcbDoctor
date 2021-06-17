@@ -11,11 +11,6 @@ export default class MedicalSpecialtiesRepository
     this.ormRepository = getRepository(MedicalSpecialty);
   }
 
-  public async findAll(): Promise<MedicalSpecialty[]> {
-    const specialties = await this.ormRepository.find();
-    return specialties;
-  }
-
   public async findSpecialties(names: string[]): Promise<MedicalSpecialty[]> {
     const specialties = this.ormRepository.find({
       where: {
