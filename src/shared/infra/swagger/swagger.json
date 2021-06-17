@@ -22,52 +22,6 @@
     }
   },
   "paths": {
-    "/specialties": {
-      "get": {
-        "summary": "Shows all registered specialties",
-        "description": "Run to find the ID's of medical specialties",
-        "consumes": [
-          "application/json"
-        ],
-        "produces": [
-          "application/json"
-        ],
-        "operationId": "showSpecialty",
-        "responses": {
-          "200": {
-            "description": "Specialties",
-            "schema": {
-              "type": "object",
-              "properties": {
-                "id": {
-                  "type": "string",
-                  "example": "26b25e69-b462-4391-b62d-59484ae0a48b"
-                },
-                "name": {
-                  "type": "string",
-                  "example": "Alergologia"
-                },
-                "createdAt": {
-                  "type": "string",
-                  "example": "2021-06-11T15:55:26.075Z"
-                },
-                "updatedAt": {
-                  "type": "string",
-                  "example": "2021-06-11T15:55:26.075Z"
-                },
-                "deletedAt": {
-                  "type": "string",
-                  "example": "null"
-                }
-              }
-            }
-          },
-          "500": {
-            "description": "Internal server error"
-          }
-        }
-      }
-    },
     "/doctors": {
       "post": {
         "summary": "Insert Doctor",
@@ -108,16 +62,7 @@
                 },
                 "medical_specialty": {
                   "type": "array",
-                  "example": [
-                    [
-                      {
-                      "id": "cceba963-7d90-4259-9530-17dc20c06863"
-                      },
-                      {
-                      "id": "e9eef370-c202-4336-b5d6-efbbafdd2ccc"
-                      }
-                    ]
-                  ]
+                  "example": ["Alergologia", "Angiologia"]
                 }
               }
             }
@@ -145,21 +90,43 @@
                   "type": "string",
                   "example": "27995848484"
                 },
-                "zip_code": {
-                  "type": "string",
-                  "example": "29032570"
+                "address": {
+                  "type": "array",
+                  "example": [
+                    {
+                      "id": "6c43caf9-cebc-45a7-a1ae-fff9e3059759",
+                      "cep": "29032-570",
+                      "state": "ES",
+                      "city": "Vitória",
+                      "street": "Rua América do Sul",
+                      "complementary": "",
+                      "createdAt": "2021-06-17T06:04:26.527Z",
+                      "updatedAt": "2021-06-17T06:04:26.527Z",
+                      "deletedAt": null
+                    }
+                  ]
                 },
                 "medical_specialty": {
                   "type": "array",
-                  "example":
-                    [
+                  "example":[
                       {
-                      "id": "cceba963-7d90-4259-9530-17dc20c06863"
+                        "id": "8b953940-00cc-4053-9dfa-2e68019d885b",
+                        "name": "Alergologia",
+                        "createdAt": "2021-06-17T05:39:10.848Z",
+                        "updatedAt": "2021-06-17T05:39:10.848Z",
+                        "deletedAt": null
                       },
                       {
-                      "id": "e9eef370-c202-4336-b5d6-efbbafdd2ccc"
+                        "id": "4a3bd2e5-495c-448c-be08-1709bfe1b0a3",
+                        "name": "Angiologia",
+                        "createdAt": "2021-06-17T05:39:10.848Z",
+                        "updatedAt": "2021-06-17T05:39:10.848Z",
+                        "deletedAt": null
                       }
-                    ]
+                  ]
+                },
+                "deletedAt": {
+                  "type": "Date"
                 },
                 "createdAt": {
                   "type": "Date"
@@ -167,45 +134,9 @@
                 "updatedAt": {
                   "type": "Date"
                 },
-                "cep": {
+                "id": {
                   "type": "string",
-                  "example": "29032-570"
-                },
-                "logradouro": {
-                  "type": "string",
-                  "example": "Rua América do Sul"
-                },
-                "complemento": {
-                  "type": "string",
-                  "example": ""
-                },
-                "bairro": {
-                  "type": "string",
-                  "example": "Resistência"
-                },
-                "localidade": {
-                  "type": "string",
-                  "example": "Vitória"
-                },
-                "uf": {
-                  "type": "string",
-                  "example": "ES"
-                },
-                "ibge": {
-                  "type": "string",
-                  "example": "3205309"
-                },
-                "gia": {
-                  "type": "string",
-                  "example": ""
-                },
-                "ddd": {
-                  "type": "string",
-                  "example": "27"
-                },
-                "siafi": {
-                  "type": "string",
-                  "example": "5705"
+                  "example": "03e799bd-b48a-4596-adc8-37cb2709bde2"
                 }
               }
             }
@@ -388,13 +319,9 @@
                   "type": "string",
                   "example": "27995848484"
                 },
-                "zipCode": {
-                  "type": "string",
-                  "example": "29032570"
-                },
                 "medicalSpecialty": {
                   "type": "string",
-                  "example": "0d83096e-505b-4d3b-a3ba-94832dd5c4e5"
+                  "example": "Angiologia"
                 },
                 "createdAt": {
                   "type": "string",
@@ -407,6 +334,22 @@
                 "deletedAt": {
                   "type": "string",
                   "example": "null"
+                },
+                "address": {
+                  "type": "array",
+                  "example": [
+                    {
+                      "id": "6c43caf9-cebc-45a7-a1ae-fff9e3059759",
+                      "cep": "29032-570",
+                      "state": "ES",
+                      "city": "Vitória",
+                      "street": "Rua América do Sul",
+                      "complementary": "",
+                      "createdAt": "2021-06-17T06:04:26.527Z",
+                      "updatedAt": "2021-06-17T06:04:26.527Z",
+                      "deletedAt": null
+                    }
+                  ]
                 }
               }
             }
