@@ -1,38 +1,24 @@
 import { inject, injectable } from 'tsyringe';
 import Doctor from '@modules/doctors/infra/typeorm/entities/Doctor';
 import IDoctorsRepository from '@modules/doctors/repositories/IDoctorsRepository';
-import DoctorDTO from '@modules/doctors/dtos/DoctorDTO';
-import IMedicalSpecialtiesRepository from '@modules/doctors/repositories/IMedicalSpecialtiesRepository';
+import UpdateDoctorDTO from '@modules/doctors/dtos/UpdateDoctorDTO';
+import AppError from '@shared/errors/AppError';
 
 @injectable()
 export default class UpdateDoctorService {
   constructor(
     @inject('DoctorsRepository')
     private doctorsRepository: IDoctorsRepository,
-
-    @inject('MedicalSpecialtiesRepository')
-    private medicalSpecialtiesRepository: IMedicalSpecialtiesRepository,
   ) {}
 
-  public async execute({
-    id,
-    name,
-    crm,
-    landline,
-    medicalSpecialty,
-    mobilePhone,
-    zipCode,
-  }: DoctorDTO): Promise<Doctor> {
-    const doctor = await this.doctorsRepository.update({
-      id,
-      name,
-      crm,
-      landline,
-      medicalSpecialty,
-      mobilePhone,
-      zipCode,
-    });
+  public async execute(doctorData: UpdateDoctorDTO): Promise<Doctor> {
+    const doctor = await this.doctorsRepository.findById(doctorData.id);
 
-    return doctor;
+    if (!doctor) {
+      throw new AppError('Doctor not found');
+    }
+
+    Object.assign(doctor, { ...doctorData });
+    return this.doctorsRepository.save(doctor);
   }
 }
