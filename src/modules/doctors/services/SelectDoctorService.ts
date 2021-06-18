@@ -1,7 +1,7 @@
 import { inject, injectable } from 'tsyringe';
 import IDoctorsRepository from '@modules/doctors/repositories/IDoctorsRepository';
-import AppError from '@shared/errors/AppError';
 import Doctor from '@modules/doctors/infra/typeorm/entities/Doctor';
+import FilterDoctorDTO from '@modules/doctors/dtos/FilterDoctorDTO';
 
 @injectable()
 export default class SelectDoctorService {
@@ -10,12 +10,8 @@ export default class SelectDoctorService {
     private doctorsRepository: IDoctorsRepository,
   ) {}
 
-  public async execute(id: string): Promise<Doctor> {
-    const doctor = await this.doctorsRepository.findById(id);
-    if (!doctor) {
-      throw new AppError('doctor not found');
-    }
-
-    return doctor;
+  public async execute(data: FilterDoctorDTO): Promise<Doctor[]> {
+    const doctors = await this.doctorsRepository.findDoctors(data);
+    return doctors;
   }
 }

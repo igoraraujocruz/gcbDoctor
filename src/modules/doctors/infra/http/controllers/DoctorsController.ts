@@ -60,13 +60,33 @@ export default class DoctorsController {
     return response.status(204).json(doctor);
   }
 
-  public async list(request: Request, response: Response): Promise<Response> {
-    const { id } = request.params;
+  public async index(request: Request, response: Response): Promise<Response> {
+    const {
+      name,
+      crm,
+      landline,
+      mobile_phone,
+      zip_code,
+      state,
+      city,
+      street,
+      medical_specialty,
+    } = request.query as Record<string, string | undefined>;
 
-    const listDoctor = container.resolve(SelectDoctorService);
+    const findDoctorsByFilter = container.resolve(SelectDoctorService);
 
-    const doctor = await listDoctor.execute(id);
+    const doctors = await findDoctorsByFilter.execute({
+      name,
+      crm,
+      landline,
+      mobilePhone: mobile_phone,
+      cep: zip_code,
+      state,
+      city,
+      street,
+      medicalSpecialty: medical_specialty,
+    });
 
-    return response.json(doctor);
+    return response.status(200).json(doctors);
   }
 }
