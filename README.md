@@ -30,6 +30,9 @@ http://localhost:3333/swagger/
 # Agora é só testar a aplicação, caso tenha alguma dúvida, fique a vontade para perguntar, meus contatos estão logo a baixo.
 
 ```
+</br>
+
+[![Run in Insomnia}](https://insomnia.rest/images/run.svg)](https://insomnia.rest/run/?label=GCBDoctor&uri=https%3A%2F%2Fraw.githubusercontent.com%2Figoraraujocruz%2FgcbDoctor%2Fmain%2Fdocs%2FInsomniaWorkspace)
 
 </br>
 
