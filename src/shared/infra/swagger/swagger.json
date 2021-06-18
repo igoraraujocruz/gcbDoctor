@@ -148,12 +148,10 @@
             "description": "Internal server error"
           }
         }
-      }
-    },
-    "/doctors/{id}": {
+      },
       "get": {
-        "summary": "Show the doctor based on id",
-        "description": "show doctor",
+        "summary": "Search Doctors",
+        "description": "Enter the property you want, for example: name, or zip_code and feed the field. The application will search for objects that satisfy it.",
         "consumes": [
           "application/json"
         ],
@@ -163,10 +161,13 @@
         "operationId": "showDoctor",
         "parameters": [
           {
-            "in": "path",
-            "name": "id",
+            "in": "query",
+            "name": "name",
             "schema": {
-              "type": "string"
+              "type": "object",
+              "additionalProperties": {
+                "type": "string"
+              }
             },
             "required": true
           }
@@ -197,28 +198,9 @@
                   "type": "string",
                   "example": "27995848484"
                 },
-                "zipCode": {
-                  "type": "string",
-                  "example": "29032570"
-                },
                 "medicalSpecialty": {
-                  "type": "array",
-                  "example": [
-                    {
-                      "id": "cceba963-7d90-4259-9530-17dc20c06863",
-                      "name": "Alergologia",
-                      "createdAt": "2021-06-12T06:32:06.575Z",
-                      "updatedAt": "2021-06-12T06:32:06.575Z",
-                      "deletedAt": null
-                    },
-                      {
-                      "id": "e9eef370-c202-4336-b5d6-efbbafdd2ccc",
-                      "name": "Angiologia",
-                      "createdAt": "2021-06-12T06:32:06.575Z",
-                      "updatedAt": "2021-06-12T06:32:06.575Z",
-                      "deletedAt": null
-                      }
-                  ]
+                  "type": "string",
+                  "example": "Angiologia"
                 },
                 "createdAt": {
                   "type": "string",
@@ -231,6 +213,22 @@
                 "deletedAt": {
                   "type": "string",
                   "example": "null"
+                },
+                "address": {
+                  "type": "array",
+                  "example": [
+                    {
+                      "id": "6c43caf9-cebc-45a7-a1ae-fff9e3059759",
+                      "cep": "29032-570",
+                      "state": "ES",
+                      "city": "Vitória",
+                      "street": "Rua América do Sul",
+                      "complementary": "",
+                      "createdAt": "2021-06-17T06:04:26.527Z",
+                      "updatedAt": "2021-06-17T06:04:26.527Z",
+                      "deletedAt": null
+                    }
+                  ]
                 }
               }
             }
@@ -239,7 +237,9 @@
             "description": "Internal server error"
           }
         }
-      },
+      }
+    },
+    "/doctors/{id}": {
       "put": {
         "summary": "Updates the doctor's record based on the id",
         "description": "Enter a valid Doctor ID, change the request body and run for the changes to be saved",
